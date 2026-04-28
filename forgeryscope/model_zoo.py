@@ -8,7 +8,7 @@ from urllib.request import urlopen
 import torch
 
 
-DEFAULT_MODEL_BASE_URL = ""
+DEFAULT_MODEL_BASE_URL = "https://github.com/vlad3996/forgeryscope/releases/download/models-v1"
 
 
 MODEL_SPECS: Dict[str, Dict[str, object]] = {

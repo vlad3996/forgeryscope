@@ -50,7 +50,8 @@ pip install -e .
 ## Model Weights
 
 Model weights are not stored in git and are not bundled into the Python package.
-They are downloaded on first use and cached locally.
+They are downloaded on first use from the Forgeryscope GitHub Release and
+cached locally.
 
 Forgeryscope resolves these model names through `forgeryscope.model_zoo`:
 
@@ -62,7 +63,7 @@ Forgeryscope resolves these model names through `forgeryscope.model_zoo`:
 - `wblot_lane_embedder.ckpt`
 - `micro_overlap_embedder.ckpt`
 
-To override the model release location:
+To override the default model release location:
 
 ```bash
 export FORGERYSCOPE_MODEL_BASE_URL="https://github.com/vlad3996/forgeryscope/releases/download/models-v1"
