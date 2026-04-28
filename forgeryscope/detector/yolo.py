@@ -18,20 +18,23 @@ class PanelExtractor:
         min_crop_side: int = 5,
         model_base_url: str = None,
         cache_dir: str = None,
+        verbose: bool = False,
     ):
         self.device = device
         self.conf_threshold = conf_threshold
         self.iou_threshold = iou_threshold
         self.min_crop_side = min_crop_side
         self.img_size = img_size
+        self.verbose = verbose
         
         weights_path = get_model_path(weights_path, cache_dir=cache_dir, base_url=model_base_url)
         self.model = YOLO(weights_path)
         self.model.to(device)
         self.names = self.model.names
         
-        print(f"Detector loaded successfully from {weights_path}. Classes: {self.names}")
-        print(f"Size: {self.img_size} | conf thresh: {self.conf_threshold}, IOU: {self.iou_threshold}, min crop side: {self.min_crop_side} pixels")
+        if self.verbose:
+            print(f"Detector loaded successfully from {weights_path}. Classes: {self.names}")
+            print(f"Size: {self.img_size} | conf thresh: {self.conf_threshold}, IOU: {self.iou_threshold}, min crop side: {self.min_crop_side} pixels")
 
     def extract_panels(
         self, 
@@ -64,7 +67,7 @@ class PanelExtractor:
             iou=self.iou_threshold,
             imgsz=self.img_size,
             device=self.device,
-            verbose=False
+            verbose=self.verbose
         )
         
         panels = self._parse_predictions(results[0], with_id)

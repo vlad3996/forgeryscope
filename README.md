@@ -104,6 +104,7 @@ panel_extractor = PanelExtractor(
     device=device,
     conf_threshold=0.7,
     iou_threshold=0.4,
+    verbose=False,
 )
 panel_extractor.EXCLUDED_LABELS = {"Graphs", "Flow Cytometry", "Body Imaging"}
 
@@ -115,6 +116,7 @@ matcher_micro = LightGlueOverlap(
     device=device,
     depth_confidence=0.9,
     width_confidence=0.9,
+    verbose=False,
 )
 
 matcher_blot = LightGlueOverlap(
@@ -128,19 +130,20 @@ matcher_blot = LightGlueOverlap(
     estimator_confidence=0.9999,
     estimator_maxIters=5000,
     estimator_refineIters=10,
+    verbose=False,
 )
 load_aliked_wblot_weights(matcher_blot)
 
-wblot_duplicate_embedder = Embedder("wblot_duplicate_embedder", device=device)
-wblot_overlap_embedder = Embedder("wblot_overlap_embedder", device=device)
-wblot_lane_embedder = Embedder("wblot_lane_embedder", device=device)
-micro_overlap_embedder = Embedder("micro_overlap_embedder", device=device)
+wblot_duplicate_embedder = Embedder("wblot_duplicate_embedder", device=device, verbose=False)
+wblot_overlap_embedder = Embedder("wblot_overlap_embedder", device=device, verbose=False)
+wblot_lane_embedder = Embedder("wblot_lane_embedder", device=device, verbose=False)
+micro_overlap_embedder = Embedder("micro_overlap_embedder", device=device, verbose=False)
 ```
 
 You can also pass a local checkpoint path instead of a model name:
 
 ```python
-embedder = Embedder("/path/to/wblot_duplicate_embedder.ckpt", device="cuda")
+embedder = Embedder("/path/to/wblot_duplicate_embedder.ckpt", device="cuda", verbose=False)
 ```
 
 ## Available Model Names

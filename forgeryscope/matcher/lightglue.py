@@ -51,14 +51,17 @@ class LightGlueOverlap:
         estimator_confidence: float = 0.9999, 
         estimator_maxIters: int = 5000, 
         estimator_refineIters: int = 10,
-        extractor_resize: Optional[int] = None
+        extractor_resize: Optional[int] = None,
+        verbose: bool = False
     ):
         self.device = torch.device(device)
+        self.verbose = verbose
 
 
         if matcher_features.lower() == "aliked":
             self.extractor = ALIKED(model_name=model_name_aliked, max_num_keypoints=max_keypoints).eval().to(self.device)
-            print(f"Using ALIKED {model_name_aliked} with max {max_keypoints} keypoints.")
+            if self.verbose:
+                print(f"Using ALIKED {model_name_aliked} with max {max_keypoints} keypoints.")
         elif matcher_features.lower() == "sift":
             self.extractor = SIFT()
         else:
@@ -69,13 +72,15 @@ class LightGlueOverlap:
         self.estimator_confidence = estimator_confidence
         self.estimator_maxIters = estimator_maxIters
         self.estimator_refineIters = estimator_refineIters
-        print(f"Estimator method: {self.estimator_method} with reprojThreshold: {self.reprojThreshold}, confidence: {self.estimator_confidence}, maxIters: {self.estimator_maxIters}, refineIters: {self.estimator_refineIters}.")
+        if self.verbose:
+            print(f"Estimator method: {self.estimator_method} with reprojThreshold: {self.reprojThreshold}, confidence: {self.estimator_confidence}, maxIters: {self.estimator_maxIters}, refineIters: {self.estimator_refineIters}.")
         if self.estimator_method not in {"RANSAC", "MAGSAC"}:
             raise NotImplementedError("Currently only RANSAC and MAGSAC are supported.")
-        print(f"LightGlue matcher initialized with features: {matcher_features}, filter_threshold: {filter_threshold}, depth_confidence: {depth_confidence}, width_confidence: {width_confidence}.")
-        print(f"LightGlueOverlap loaded. Device: {self.device}, Max keypoints: {max_keypoints}")
+        if self.verbose:
+            print(f"LightGlue matcher initialized with features: {matcher_features}, filter_threshold: {filter_threshold}, depth_confidence: {depth_confidence}, width_confidence: {width_confidence}.")
+            print(f"LightGlueOverlap loaded. Device: {self.device}, Max keypoints: {max_keypoints}")
         self.extractor_resize = extractor_resize
-        if extractor_resize is not None:
+        if self.verbose and extractor_resize is not None:
             print(f"Extractor resize enabled: {self.extractor_resize} !!")
 
     
@@ -541,9 +546,10 @@ class LightGlueOverlap:
         plt.tight_layout()
         plt.show()
         
-        print(f"Total matches: {len(matches01['matches'])}")
-        print(f"Displayed: {len(matches)}")
-        print(f"Mean match score: {scores.mean():.3f}")
+        if self.verbose:
+            print(f"Total matches: {len(matches01['matches'])}")
+            print(f"Displayed: {len(matches)}")
+            print(f"Mean match score: {scores.mean():.3f}")
 
 
 def create_duplicate_masks(

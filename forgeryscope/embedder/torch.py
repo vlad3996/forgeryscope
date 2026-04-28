@@ -45,8 +45,10 @@ class Embedder:
         transform_type: str = None,
         model_base_url: str = None,
         cache_dir: str = None,
+        verbose: bool = False,
     ):
         self.device = device
+        self.verbose = verbose
         checkpoint_spec = MODEL_SPECS.get(checkpoint_path, {})
         width = width or int(checkpoint_spec.get("width", 224))
         height = height or int(checkpoint_spec.get("height", 224))
@@ -60,7 +62,8 @@ class Embedder:
         custom_pool_state = {k.replace('custom_pool.', ''): v for k, v in state_dict.items() if k.startswith('custom_pool.')}
 
         pooling_type = hparams.get('pooling_type', 'avg')
-        print(f"Using pooling type: {pooling_type}")
+        if self.verbose:
+            print(f"Using pooling type: {pooling_type}")
         
         if pooling_type in ["none", "attention"]:
             global_pool_setting = ""
@@ -106,8 +109,9 @@ class Embedder:
         norm_mean = model_config.get("mean")
         norm_std = model_config.get("std")
         
-        print(f"Model : {hparams['model_name']}. Using normalization mean: {norm_mean}, std: {norm_std}")
-        print('using transform_type:', transform_type)
+        if self.verbose:
+            print(f"Model : {hparams['model_name']}. Using normalization mean: {norm_mean}, std: {norm_std}")
+            print('using transform_type:', transform_type)
         if transform_type == 'torchvision_resize':
             self.transform = TF.Compose([
                 TF.Resize((height, width)),
