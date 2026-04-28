@@ -17,7 +17,7 @@ For the full competition approach and design notes, see
 - **Panel matching** with LightGlue, SIFT, ALIKED, and geometry helpers
 - **On-demand model download** from GitHub Releases
 
-## Linux Installation
+## Installation
 
 Create and activate a virtual environment:
 
@@ -32,9 +32,6 @@ Install Forgeryscope from PyPI:
 ```bash
 pip install forgeryscope
 ```
-
-The package is available on PyPI:
-[https://pypi.org/project/forgeryscope/](https://pypi.org/project/forgeryscope/)
 
 To install the latest version directly from GitHub:
 
@@ -55,8 +52,7 @@ pip install -e .
 Model weights are not stored in git and are not bundled into the Python package.
 They are downloaded on first use and cached locally.
 
-Upload these files as assets to a GitHub Release, for example release tag
-`models-v1`:
+Forgeryscope resolves these model names through `forgeryscope.model_zoo`:
 
 - `yolo_panel_extractor.pt`
 - `yolo_lane_extractor.pt`
@@ -66,7 +62,7 @@ Upload these files as assets to a GitHub Release, for example release tag
 - `wblot_lane_embedder.ckpt`
 - `micro_overlap_embedder.ckpt`
 
-Then set the model URL in your Linux shell:
+To override the model release location:
 
 ```bash
 export FORGERYSCOPE_MODEL_BASE_URL="https://github.com/vlad3996/forgeryscope/releases/download/models-v1"
@@ -156,7 +152,7 @@ embedder = Embedder("/path/to/wblot_duplicate_embedder.ckpt", device="cuda", ver
 - `wblot_lane_embedder`
 - `micro_overlap_embedder`
 
-## Publishing Notes
+## Maintainer Notes
 
 Keep `checkpoints/` ignored by git. Large `.pt`, `.pth`, and `.ckpt` files
 should live in GitHub Releases, not in normal repository history.
