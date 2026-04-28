@@ -2,6 +2,7 @@ from typing import Union, List, Tuple
 import numpy as np
 from PIL import Image
 from ultralytics import YOLO
+from forgeryscope.model_zoo import get_model_path
 
 
 class PanelExtractor:   
@@ -9,12 +10,14 @@ class PanelExtractor:
     
     def __init__(
         self, 
-        weights_path: str, 
+        weights_path: str = "yolo_panel_extractor", 
         device: str = 'cpu', 
         img_size: int = 640, 
         conf_threshold: float = 0.3, 
         iou_threshold: float = 0.4, 
-        min_crop_side: int = 5
+        min_crop_side: int = 5,
+        model_base_url: str = None,
+        cache_dir: str = None,
     ):
         self.device = device
         self.conf_threshold = conf_threshold
@@ -22,6 +25,7 @@ class PanelExtractor:
         self.min_crop_side = min_crop_side
         self.img_size = img_size
         
+        weights_path = get_model_path(weights_path, cache_dir=cache_dir, base_url=model_base_url)
         self.model = YOLO(weights_path)
         self.model.to(device)
         self.names = self.model.names

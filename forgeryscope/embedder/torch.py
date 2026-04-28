@@ -14,6 +14,7 @@ import torch.nn.functional as F
 import torchvision.transforms as TF
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+from forgeryscope.model_zoo import MODEL_SPECS, get_model_path
 
 
 class AttentionPooling(torch.nn.Module):
@@ -39,11 +40,18 @@ class Embedder:
         self, 
         checkpoint_path: str, 
         device: str = 'cuda', 
-        width: int = 224, 
-        height: int = 224, 
-        transform_type: str = 'resize'
+        width: int = None, 
+        height: int = None, 
+        transform_type: str = None,
+        model_base_url: str = None,
+        cache_dir: str = None,
     ):
         self.device = device
+        checkpoint_spec = MODEL_SPECS.get(checkpoint_path, {})
+        width = width or int(checkpoint_spec.get("width", 224))
+        height = height or int(checkpoint_spec.get("height", 224))
+        transform_type = transform_type or str(checkpoint_spec.get("transform_type", "resize"))
+        checkpoint_path = get_model_path(checkpoint_path, cache_dir=cache_dir, base_url=model_base_url)
         
         checkpoint = torch.load(checkpoint_path, map_location='cpu')
         hparams = checkpoint['hyper_parameters']

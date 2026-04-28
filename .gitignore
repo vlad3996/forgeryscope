@@ -2,3 +2,4 @@
 *.pyc
 dist/
 forgeryscope.egg-info
+checkpoints/
