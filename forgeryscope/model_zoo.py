@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 from urllib.request import urlopen
 
 import torch
+from tqdm.auto import tqdm
 
 
 DEFAULT_MODEL_BASE_URL = "https://github.com/vlad3996/forgeryscope/releases/download/models-v1"
@@ -144,11 +145,21 @@ def _download(url: str, filename: str, cache_dir: Path, force_download: bool) ->
 
     temp_destination = destination.with_suffix(destination.suffix + ".tmp")
     with urlopen(url) as response, open(temp_destination, "wb") as handle:
-        while True:
-            chunk = response.read(1024 * 1024)
-            if not chunk:
-                break
-            handle.write(chunk)
+        total = response.headers.get("Content-Length")
+        total_size = int(total) if total is not None else None
+        with tqdm(
+            total=total_size,
+            unit="B",
+            unit_scale=True,
+            unit_divisor=1024,
+            desc=filename,
+        ) as progress:
+            while True:
+                chunk = response.read(1024 * 1024)
+                if not chunk:
+                    break
+                handle.write(chunk)
+                progress.update(len(chunk))
     temp_destination.replace(destination)
     return destination
 
