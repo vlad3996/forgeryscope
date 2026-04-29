@@ -96,7 +96,7 @@ from forgeryscope.matcher.plot import visualize_duplicate_masks
 from forgeryscope.matcher.lane import find_lanes_in_blot_panels, create_lane_match_masks
 
 DEVICE = "cuda"
-PRINT_MODEL_DEFINITION = False
+PRINT_MODEL_DEFINITION = True
 VERBOSE = False
 
 panel_extractor = PanelExtractor(
@@ -104,7 +104,7 @@ panel_extractor = PanelExtractor(
     device=DEVICE,
     conf_threshold=0.7,
     iou_threshold=0.4,
-    verbose=PRINT_MODEL_DEFINITION,
+    verbose=False,
 )
 panel_extractor.EXCLUDED_LABELS = {"Graphs", "Flow Cytometry", "Body Imaging"}
 

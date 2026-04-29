@@ -8,6 +8,8 @@ The final solution followed the pipeline below:
 4. If no matches were found, fall back to the best available public Kaggle segmentation kernel, constrained by Blot/Microscopy masks. I initially used @ravaghi’s version and later replaced it with @pankajiitr’s code without modifications. This consistently provided a ~0.005–0.01 improvement, so I included it in both final submissions.
 5. If no evidence was detected, classify the sample as **authentic**.
 
+![](https://www.googleapis.com/download/storage/v1/b/kaggle-user-content/o/inbox%2F29607288%2Fba1a1b08fe068b52f212b728270fe808%2F2026-04-29%20183252.png?generation=1777473283918756&alt=media)
+
 -----
 
 # Code
@@ -18,7 +20,7 @@ License note: the repository source code is MIT-licensed, but the YOLO-based det
 
 Check out the [vlad3996/forgeryscope repository](https://github.com/vlad3996/forgeryscope) for installation instructions, examples, and pretrained weights.
 
-A single-image inference example is available in [examples/quick_start.ipynb](https://github.com/vlad3996/forgeryscope/blob/main/examples/quick_start.ipynb), and a simplified Kaggle submission pipeline is available [here](https://www.kaggle.com/code/orshanec/1st-place-solution-simplified).
+A single-image inference example is available in [examples/quick_start.ipynb](https://github.com/vlad3996/forgeryscope/blob/main/examples/quick_start.ipynb), and a simplified Kaggle submission pipeline is available [here](https://www.kaggle.com/code/orshanec/1st-place-solution).
 
 The package includes two YOLO-based detection models, four embedding models, and two keypoint extraction and matching pipelines. The core pipeline logic remains unchanged, with simplifications applied mainly to reduce complexity and improve usability.
 

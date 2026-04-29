@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "forgeryscope"
-version = "1.0.0"
+version = "1.0.1"
 description = "Tools for the competition"
 readme = "README.md"
 requires-python = ">=3.9"
