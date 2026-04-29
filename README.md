@@ -324,7 +324,14 @@ When a checkpoint changes:
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
+The original Forgeryscope source code in this repository is licensed under the
+MIT License. See [LICENSE](LICENSE).
+
+Third-party dependencies and model weights may be governed by separate terms.
+In particular, Ultralytics YOLO code and trained YOLO models are licensed by
+Ultralytics under AGPL-3.0 by default, with separate Enterprise licensing
+available from Ultralytics for use cases that cannot comply with AGPL-3.0.
+This applies to the YOLO-based detector weights distributed for this project.
 
 ## Author
 
