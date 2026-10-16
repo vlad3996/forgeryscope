@@ -16,7 +16,7 @@ The final solution followed the pipeline below:
 
 I packaged the solution as a Python library and published the model weights through a GitHub Release.
 
-License note: the repository source code is MIT-licensed, but the YOLO-based detector weights are not MIT. Ultralytics YOLO code and trained YOLO models are licensed by Ultralytics under AGPL-3.0 by default, with separate Enterprise licensing available from Ultralytics.
+License note: the repository source code and Forgeryscope-authored portions of the non-YOLO weights are MIT-licensed, subject to the separate terms of upstream pretrained components. The YOLO-based detector weights are not covered by the MIT grant: Ultralytics licenses YOLO code and trained YOLO models under AGPL-3.0 by default, with separate Enterprise licensing available. YOLO was used to prepare image crops for training the separate embedding models; the embedding checkpoints do not contain YOLO code or weights. See the [checkpoint-by-checkpoint license description](README.md#license).
 
 Check out the [vlad3996/forgeryscope repository](https://github.com/vlad3996/forgeryscope) for installation instructions, examples, and pretrained weights.
 

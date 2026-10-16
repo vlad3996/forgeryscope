@@ -63,6 +63,8 @@ Forgeryscope resolves these model names through `forgeryscope.model_zoo`:
 - `wblot_lane_embedder.ckpt`
 - `micro_overlap_embedder.ckpt`
 
+License terms for each checkpoint are listed in [License](#license) below.
+
 To override the default model release location:
 
 ```bash
@@ -327,11 +329,33 @@ When a checkpoint changes:
 The original Forgeryscope source code in this repository is licensed under the
 MIT License. See [LICENSE](LICENSE).
 
-Third-party dependencies and model weights may be governed by separate terms.
-In particular, Ultralytics YOLO code and trained YOLO models are licensed by
-Ultralytics under AGPL-3.0 by default, with separate Enterprise licensing
-available from Ultralytics for use cases that cannot comply with AGPL-3.0.
-This applies to the YOLO-based detector weights distributed for this project.
+The following applies to the checkpoints distributed in the Forgeryscope
+`models-v1` release:
+
+| Checkpoint | License scope |
+| --- | --- |
+| `wblot_duplicate_embedder.ckpt` | Forgeryscope-authored weights and fine-tuning: MIT; pretrained Next-ViT backbone: Apache-2.0 upstream terms. |
+| `wblot_overlap_embedder.ckpt` | Forgeryscope-authored weights and fine-tuning: MIT; pretrained Next-ViT backbone: Apache-2.0 upstream terms. |
+| `wblot_lane_embedder.ckpt` | Forgeryscope-authored weights and fine-tuning: MIT; pretrained Next-ViT backbone: Apache-2.0 upstream terms. |
+| `micro_overlap_embedder.ckpt` | Forgeryscope-authored weights and fine-tuning: MIT; pretrained Next-ViT backbone: Apache-2.0 upstream terms. |
+| `aliked_wblot.pth` | Forgeryscope-authored fine-tuning: MIT; ALIKED and LightGlue components retain their upstream BSD-3-Clause and Apache-2.0 terms, respectively. |
+| `yolo_panel_extractor.pt` | Ultralytics YOLO-based model: AGPL-3.0 by default, or a separate Ultralytics Enterprise license. The Forgeryscope MIT grant does not cover the YOLO model. |
+| `yolo_lane_extractor.pt` | Ultralytics YOLO-based model: AGPL-3.0 by default, or a separate Ultralytics Enterprise license. The Forgeryscope MIT grant does not cover the YOLO model. |
+
+YOLO detectors were used to select and crop source images for the embedders'
+training corpus, including western blot lanes. The embedders were trained as
+separate Next-ViT models; they do not contain YOLO code or weights. We do not
+treat the use of YOLO-generated crops as making the embedder checkpoints
+AGPL-licensed. Using a YOLO detector in a downstream application is a separate
+licensing question.
+
+Upstream license references: [Ultralytics licensing](https://www.ultralytics.com/license),
+[Next-ViT model card](https://huggingface.co/timm/nextvit_small.bd_ssld_6m_in1k),
+[ALIKED](https://github.com/Shiaoming/ALIKED/blob/main/LICENSE), and
+[LightGlue](https://github.com/cvg/LightGlue#license). The
+[GNU GPL FAQ on program output](https://www.gnu.org/licenses/gpl-faq.en.html#GPLOutput)
+explains the general distinction between a program's license and the output it
+produces.
 
 ## Author
 

@@ -1,17 +1,29 @@
 License scope
 
-The original Forgeryscope source code in this repository is licensed under the
-MIT License below.
+The original Forgeryscope source code in this repository, and the
+Forgeryscope-authored portions of the non-YOLO checkpoints listed below, are
+licensed under the MIT License below:
 
-Third-party dependencies and model weights may be governed by separate license
-terms. In particular, Ultralytics YOLO code and trained YOLO models are licensed
-by Ultralytics under AGPL-3.0 by default, with separate Enterprise licensing
-available from Ultralytics for use cases that cannot comply with AGPL-3.0. This
-applies to the YOLO-based detector weights distributed for this project.
+- wblot_duplicate_embedder.ckpt
+- wblot_overlap_embedder.ckpt
+- wblot_lane_embedder.ckpt
+- micro_overlap_embedder.ckpt
+- aliked_wblot.pth
+
+Third-party components within these checkpoints retain their own terms. The
+four embedding checkpoints use a pretrained Next-ViT backbone with upstream
+Apache-2.0 terms. The ALIKED/LightGlue checkpoint includes components with
+upstream BSD-3-Clause and Apache-2.0 terms. See README.md for references.
+
+The YOLO detector checkpoints (yolo_panel_extractor.pt and
+yolo_lane_extractor.pt) and Ultralytics YOLO code are outside this MIT grant.
+Ultralytics licenses YOLO-trained models under AGPL-3.0 by default and offers
+separate Enterprise licensing. Using YOLO to prepare training crops did not
+incorporate YOLO code or weights into the non-YOLO checkpoints.
 
 MIT License
 
-Copyright (c) 2026
+Copyright (c) 2026 Uladzislau Leketush
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
